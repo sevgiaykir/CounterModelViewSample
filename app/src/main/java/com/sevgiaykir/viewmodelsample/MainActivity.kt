@@ -17,28 +17,29 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        
+        //setContentView(R.layout.activity_main)
+
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel=viewModel
+        //Tüm live data'ları otomatik observe eder
+        binding.lifecycleOwner=this
 
-        val clickMeButton=findViewById<Button>(R.id.clickMeButton)
+        //val clickMeButton=findViewById<Button>(R.id.clickMeButton)
         //ya da val clickMeButton : Button=findViewById(R.id.clickMeButton)
-        val counterText=findViewById<TextView>(R.id.counterText)
+        //val counterText=findViewById<TextView>(R.id.counterText)
 
-
+        //1. View Binding (replaces findViewById)
+        //2. Data Binding
+        //3. (Deprecated) synthetic imports (kotlin-android-extensions)
         //********************************************
         //observer pattern
-        viewModel.counter.observe(this){
-            counterText.text= it
-        }
+        //
 
         //counterText.text= viewModel.convertCounter()
 
-        clickMeButton.setOnClickListener{
-            viewModel.incrementCounter()
-            //counterText.text= viewModel.convertCounter()
-        }
-        Log.e("MainActivity", "is onCreate")
+//        clickMeButton.setOnClickListener{
+//            viewModel.incrementCounter()
+//            //counterText.text= viewModel.convertCounter()
+//        }
     }
 }
